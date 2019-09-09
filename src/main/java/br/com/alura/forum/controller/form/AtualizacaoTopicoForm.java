@@ -37,5 +37,6 @@ public class AtualizacaoTopicoForm {
         topico.setMensagem(this.mensagem);
 
         return topico;
+
     }
 }

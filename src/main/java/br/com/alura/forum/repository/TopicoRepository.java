@@ -1,6 +1,8 @@
 package br.com.alura.forum.repository;
 
 import br.com.alura.forum.model.Topico;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -21,5 +23,5 @@ import java.util.List;
 
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
 
-    List<Topico> findByCursoNome(String nomeCurso); //Curso esta em Topico, e Nome é um atributo de Curso. Em caso de ambiguidade posso utilizar underline Curso_Nome caso exista uma variavel com nome CursoNome
+    Page<Topico> findByCursoNome(String nomeCurso, Pageable paginacao); //Curso esta em Topico, e Nome é um atributo de Curso. Em caso de ambiguidade posso utilizar underline Curso_Nome caso exista uma variavel com nome CursoNome
 }

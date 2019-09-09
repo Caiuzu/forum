@@ -36,7 +36,6 @@ public class AtualizacaoTopicoForm {
         topico.setTitulo(this.titulo);
         topico.setMensagem(this.mensagem);
 
-        return topico;
-
+        return topico; //teste de merge
     }
 }

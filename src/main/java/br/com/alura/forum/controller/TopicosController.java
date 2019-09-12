@@ -8,6 +8,7 @@ import br.com.alura.forum.model.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -33,6 +34,7 @@ public class TopicosController {
 
     //@RequestMapping(value = "/topicos", method = RequestMethod.GET)
     @GetMapping /*http://localhost:8080/topicos?page=0&size=10&sort=id,desc&sort=dataCriacao.asc*/
+    @Cacheable(value = "listaDeTopicos")
     public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso,
                                  @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable paginacao /*@RequestParam int pagina, @RequestParam int qtd, @RequestParam String ordenacao*/){ // se não houver parametro recebido na url ele chama o findAll(), senao ele filtra pelo parametro recebido
                                 //@PageableDefault serve para caso nao tenha parametro ele poe um como padrao

@@ -114,3 +114,6 @@ public class TopicosController {
 
     }
 }
+
+/*utilizar cache somente em: tabelas que nunca sao atualizadas ou raramente sao atualizadas, no caso de listagem nao eh interessante, so sendo exemplo para o exercicio
+* tabelas de pais, tabelas de estado, cidade, tipo, que sao cadastradas e dificilmente serao atualizadas, consultas que fazem sentido o cache, tomar cuidado com o cache*/

@@ -8,6 +8,7 @@ import br.com.alura.forum.model.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,6 +57,7 @@ public class TopicosController {
     //@RequestMapping(value = "/topicos", method = RequestMethod.POST)
     @PostMapping
     @Transactional // por garantia colocar transaction casa haja mudança de bd
+    @CacheEvict(value = "listaDeTopicos", allEntries = true) //server para invalidar um cache/ limpa o cache
     public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder){ //@resquestbody avisa que isso sera feito na requisição do body as info, @valid avisa q usa validação e mostra se tiver errado no terminal
         //Form é quando o cliente envia para a api
         Topico topico = form.converter(cursoRepository);
@@ -82,6 +84,7 @@ public class TopicosController {
 
     @PutMapping("/{id}") //update de campos referente ao id dinamico passado na url
     @Transactional // é necessario colocar para disparar o commit no banco de dados
+    @CacheEvict(value = "listaDeTopicos", allEntries = true)
     public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) { /*put é quando quero sobreesvrecer todas as informações, e o pat é mudar só alguns campos. Mas no geral usa put*/
 
         Optional<Topico> optional = topicoRepository.findById(id);
@@ -97,6 +100,7 @@ public class TopicosController {
 
     @DeleteMapping("/{id}")
     @Transactional// por garantia colocar transaction casa haja mudança de bd
+    @CacheEvict(value = "listaDeTopicos", allEntries = true)
     public ResponseEntity<?> remover(@PathVariable Long id){
 
         Optional<Topico> optional = topicoRepository.findById(id);

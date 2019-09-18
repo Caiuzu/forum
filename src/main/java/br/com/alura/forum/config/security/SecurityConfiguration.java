@@ -24,7 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
         .antMatchers(HttpMethod.GET,"/topicos").permitAll()
-        .antMatchers(HttpMethod.GET,"/topicos/*").permitAll();
+        .antMatchers(HttpMethod.GET,"/topicos/*").permitAll()
+        .anyRequest().authenticated()
+        .and().formLogin();//formulario padrao do spring
     }
 
     @Override /*configuraçãod e recursos estáticos (css, javascript, img, etc)*/

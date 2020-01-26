@@ -58,7 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override /*configuração de recursos estáticos (css, javascript, img, etc)*/
     public void configure(WebSecurity web) throws Exception {
-    // Se o front fosse integrado, seria configurado para nao ser bloqueado o front aqui, não ser interceptado na area de segurança
+    // Se o front fosse integrado, seria configurado para nao ser bloqueado o front/documentaçao aqui, não ser interceptado na area de segurança
+        web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
     }
 
     /*public static void main(String[] args){
